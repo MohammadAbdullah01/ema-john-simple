@@ -8,14 +8,16 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 import './Orders.css'
 
 const Orders = () => {
-    const [products, setProducts] = useProducts()
-    const [cart, setCart] = useCart(products)
-    const handleRemoveItem = (product) => {
-        const rest = cart.filter(pd => pd.id !== product.id)
-        setCart(rest)
-        removeFromDb(product.id)
 
+    const [products, setProducts] = useProducts()
+    const [cart, setCart] = useCart()
+
+    const handleRemoveItem = (product) => {
+        const rest = cart.filter(pd => pd._id !== product._id)
+        setCart(rest)
+        removeFromDb(product._id)
     }
+
     return (
         <div>
             <div className="shop">
@@ -23,7 +25,7 @@ const Orders = () => {
                     {cart.map(product => <ReviewItem
                         handleRemoveItem={handleRemoveItem}
                         product={product}
-                        key={product.id}
+                        key={product._id}
                     ></ReviewItem>)}
                 </div>
                 <div className="cart-container">

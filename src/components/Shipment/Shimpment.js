@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
@@ -6,6 +7,7 @@ const Shimpment = () => {
     const [name, setName] = useState("")
     const [address, setAddress] = useState("")
     const [number, setNumber] = useState("")
+    // const [user, setUser] = useState({})
 
     const handleName = event => {
         setName(event.target.value)
@@ -23,6 +25,14 @@ const Shimpment = () => {
 
     }
     const [user] = useAuthState(auth)
+
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         setUser(user)
+    //     })
+    // }, [])
+    console.log(user)
+
     return (
         <div className='form-container'>
             <h2 className="form-title">Shipping Information</h2>
